@@ -42,13 +42,17 @@ public class CsvReader
             {
                 string line = s.ReadLine();
                 string[] values = line.Split(",");
+                bool cloud = values[4] == "active";
+                bool manager = values[6] == "TRUE";
                 AccessRecord record = new AccessRecord
                 {
                     DisplayName = values[0],
                     FirstName = values[1],
                     LastName = values[2],
                     WorkEmail = values[3],
+                    CloudLifecycleState = cloud,
                     IdentityID = values[5],
+                    IsManager = manager,
                     Department = values[7],
                     JobTitle = values[8],
                     Uid = values[9],
