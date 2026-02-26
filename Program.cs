@@ -30,6 +30,15 @@ class Program
         var p3 = from record in p1
                  group record by record.DisplayName;
 
+        foreach (var group in p3)
+        {
+            Console.WriteLine(group.Key);
+
+            foreach (var record in group)
+            {
+                Console.WriteLine(" " + record.AccessSourceName + "--" + record.AccessDisplayName);
+            }
+        }
     }
 }
 
