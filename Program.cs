@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.ComponentModel.Design;
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.Win32.SafeHandles;
 
 namespace Reading_csv;
@@ -7,7 +8,14 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        string filePath = "Francis Tuttle Identities_Basic.csv";
+        List<AccessRecord> records = CsvReader.Read(filePath);
+        Console.WriteLine("total records: " + records.Count);
+
+        var p1 = from record in records
+                 where !record.CloudLifecycleState
+                 select record;
+        Console.WriteLine("inactive records: " + p1.Count());
     }
 }
 
