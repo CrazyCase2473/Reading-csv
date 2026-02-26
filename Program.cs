@@ -36,11 +36,32 @@ class Program
 
             foreach (var record in group)
             {
-                if(!string.IsNullOrEmpty(record.AccessSourceName)&&!string.IsNullOrEmpty(record.AccessDisplayName))
-                { Console.WriteLine(" " + record.AccessSourceName + "--" + record.AccessDisplayName);}
-                
+                if (!string.IsNullOrEmpty(record.AccessSourceName) && !string.IsNullOrEmpty(record.AccessDisplayName))
+                { Console.WriteLine(" " + record.AccessSourceName + "--" + record.AccessDisplayName); }
+
             }
         }
+        var p4 = (from record in records
+                  select record.Department)
+        .Distinct()
+        .OrderBy(name => name);
+        foreach (var dept in p4)
+        {
+            if (!string.IsNullOrEmpty(dept))
+            {
+                Console.WriteLine(dept);
+            }
+        }
+        var p5 = from record in records
+                 group record by record.Department into deptgroup
+                 select new
+                 {
+                     Department = deptgroup.Key,
+                    DeptCount = deptgroup
+                     .Select(r => r.DisplayName)
+                     .Distinct()
+                     .Count()
+        };
     }
 }
 
