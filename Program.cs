@@ -69,6 +69,26 @@ class Program
                 Console.WriteLine(dept.Department + " - " + dept.DeptCount);
             }
         }
+
+        var p6 = from record in records
+                 where !record.CloudLifecycleState && !string.IsNullOrEmpty(record.AccessType)
+                 group record by record.Department into deptgroup
+                 select new
+                 {
+                     department = deptgroup.Key,
+                     inactivewithaccesscount = deptgroup
+                     .Select(r => r.DisplayName)
+                     .Distinct()
+                     .Count()
+                 };
+        Console.WriteLine("Inactive with access count by dept");
+        foreach (var dept in p6.OrderBy(d => d.department))
+        {
+            if (!string.IsNullOrEmpty(dept.department))
+            {
+                Console.WriteLine(dept.department + " - " + dept.inactivewithaccesscount);
+            }
+        }
     }
 }
 
