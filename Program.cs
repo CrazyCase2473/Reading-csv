@@ -36,7 +36,9 @@ class Program
 
             foreach (var record in group)
             {
-                Console.WriteLine(" " + record.AccessSourceName + "--" + record.AccessDisplayName);
+                if(!string.IsNullOrEmpty(record.AccessSourceName)&&!string.IsNullOrEmpty(record.AccessDisplayName))
+                { Console.WriteLine(" " + record.AccessSourceName + "--" + record.AccessDisplayName);}
+                
             }
         }
     }
