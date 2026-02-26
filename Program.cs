@@ -16,6 +16,12 @@ class Program
                  where !record.CloudLifecycleState
                  select record;
         Console.WriteLine("inactive records: " + p1.Count());
+
+        var p2 = from record in records
+                 where !record.CloudLifecycleState
+                 select record.DisplayName
+                 .Distinct()
+                 .OrderBy(name => name);
     }
 }
 
