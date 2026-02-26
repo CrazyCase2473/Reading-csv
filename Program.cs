@@ -57,11 +57,18 @@ class Program
                  select new
                  {
                      Department = deptgroup.Key,
-                    DeptCount = deptgroup
+                     DeptCount = deptgroup
                      .Select(r => r.DisplayName)
                      .Distinct()
                      .Count()
-        };
+                 };
+        foreach (var dept in p5.OrderBy(d => d.Department))
+        {
+            if (!string.IsNullOrEmpty(dept.Department))
+            {
+                Console.WriteLine(dept.Department + " - " + dept.DeptCount);
+            }
+        }
     }
 }
 
