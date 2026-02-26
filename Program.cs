@@ -17,11 +17,16 @@ class Program
                  select record;
         Console.WriteLine("inactive records: " + p1.Count());
 
-        var p2 = from record in records
+        var p2 = (from record in records
                  where !record.CloudLifecycleState
-                 select record.DisplayName
+                 select record.DisplayName)
                  .Distinct()
                  .OrderBy(name => name);
+
+        foreach (var name in p2)
+        {
+            Console.WriteLine(name);
+        }
     }
 }
 
